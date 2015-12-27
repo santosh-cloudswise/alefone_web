@@ -14,6 +14,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 #/home/santosh/code/alefone_web/src
 
 
+
+#email related config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bsantoshraj@gmail.com'
+EMAIL_HOST_PASSWORD = 'k1ngf1sh'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -25,21 +33,86 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['/home/santosh/code/alefone_web/static/templates/'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.csrf',
+                # 'allauth.account.context_processors.account',
+               # 'allauth.socialaccount.context_processors.socialaccount',
+            ],
+        },
+    },
+]
+
+
+AUTHENTICATION_BACKENDS = (
+        "django.contrib.auth.backends.ModelBackend",
+        "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+
+
+
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = (
+#    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profiles',
      'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 )
+
+SITE_ID=1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+#LOGIN_REDIRECT_URL = '/profile/'
+#LOGIN_URL='/acounts/login/'
+ACCOUNT_AUTHENTICATION_METHOD="username_email"
+#ACCOUNT_USERNAME_REQUIRED=False
+#ACCOUNT_EMAIL_REQUIRED=True
+#ACCOUNT_USER_MODEL_USERNAME_FIELD=None
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_REDIRECT_URL='/'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
+ACCOUNT_USER_DISPLAY = lambda user: user.get_short_name()
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+
+#STRIPE INFO
+#TEST KEYS
+STRIPE_PUBLISHABLE_KEY  = 'pk_test_ewCzElJ9vuuc426wMqPUNMbn'
+STRIPE_SECRET_KEY = 'sk_test_3iXHFWwjUtXOEICNCxf54bmy'
+
+
+#LIVE KEYS
+#STRIPE_PUBLISHABLE_KEY  = 'pk_live_qEq33XtDyB2AonDjzeokYNhi'
+#STRIPE_SECRET_KEY = 'sk_live_Tvda7Kepq238nvTsyTpZvFnd'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

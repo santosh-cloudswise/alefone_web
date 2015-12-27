@@ -9,13 +9,13 @@ def home(request):
 	form = ContactForm(request.POST or None)
 	confirm_message = None
 	if form.is_valid():
-		form.cleaned_data['hello']
-		form.cleaned_data['name']
+		comment=form.cleaned_data['comment']
+		name=form.cleaned_data['name']
 		subject = 'Message from CloudsWise.com'
-		msg = '%s %s' %("hello " ,name)
+		msg = '%s %s' %(comment ,name)
 		to_us = [ settings.EMAIL_HOST_USER]
-		frm = form.cleand_data['email']
-		send_email(subject,msg,frm,to_us, fail_silently=False)
+		frm = form.cleaned_data['email']
+		send_mail(subject,msg,frm,to_us, fail_silently=False)
 #		print request.POST
 		title = "Thank You"
 		confirm_message =  """

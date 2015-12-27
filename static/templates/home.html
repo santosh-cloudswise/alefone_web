@@ -2,10 +2,55 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-        <h1>Theme example</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+        <h1>Cloud's Own University</h1>
+        <p>The Gartner's Magic Quadrant leaders tend to change every  three years. The Goliath's of the world, IBM, Microsoft, Google, Oracle are all challenged sometimes by the small, obscure and very nimble, not so familiar companies which thrive on automation, orchestration and with never before seen agility.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
       </div>
 {% endblock %}
 {% block content %}
-   <h1> CloudsWise </h1>
+  <div class="row">
+        <div class="col-sm-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+        <div class="col-sm-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+       </div>
+        <div class="col-sm-4">
+        {% if request.user.is_authenticated %}
+        <h3> Hello {{request.user }} </h3>
+	{% else %}
+        <form class="login" method="POST" action="/accounts/login/">
+        {% csrf_token %}
+  
+
+<div id="div_id_login" class="form-group"> <label for="id_login" class="control-label  requiredField">
+                E-mail<span class="asteriskField">*</span> </label> <div class="controls "> <input autofocus="autofocus" class="textinput textInput form-control" id="id_login" name="login" placeholder="E-mail address" type="email"> </div> </div> <div id="div_id_password" class="form-group"> <label for="id_password" class="control-label  requiredField">
+                Password<span class="asteriskField">*</span> </label> <div class="controls "> <input class="textinput textInput form-control" id="id_password" name="password" placeholder="Password" type="password"> </div> </div> <div class="form-group"> <div id="div_id_remember" class="checkbox"> <label for="id_remember" class=""> <input class="checkboxinput" id="id_remember" name="remember" type="checkbox">
+                    Remember Me
+                    
+
+
+    
+
+
+
+
+    
+
+
+
+                </label> </div> </div>
+
+  
+  <button class="btn btn-default primaryAction" type="submit">Sign In</button>
+  <a class="btn btn-link button secondaryAction" href="{% url 'account_reset_password'  %}">Forgot Password?</a>
+  <a class="btn btn-link button secondaryAction" href="{% url 'account_signup' %}">Signup</a>
+</form>
+{% endif %}
+        </div>
+      </div>
 {% endblock %}
