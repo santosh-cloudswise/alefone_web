@@ -3,7 +3,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 import allauth
+
+
+admin.autodiscover()
  
+from tastypie.api import Api
+#from polls.api import PollResource, ChoiceResource
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,4 +22,6 @@ urlpatterns = patterns('',
     url(r'^checkout','checkout.views.checkout', name='checkout'),
     url(r'^contact','contact.views.home',name='contact'),
     url(r'^admin/', include(admin.site.urls)),
+#    url(r'^oauth2/', include('provider.oauth2.urls', namespace = 'oauth2')),
+#    url(r'^api/', include(v1_api.urls)),
 ) + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
